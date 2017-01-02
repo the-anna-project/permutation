@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func Test_Permutation_maskAnyf_001(t *testing.T) {
+func Test_Error_maskAnyf(t *testing.T) {
 	testCases := []struct {
 		InputError  error
 		InputFormat string

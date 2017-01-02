@@ -1,10 +1,6 @@
 package permutation
 
-import (
-	objectspec "github.com/the-anna-project/spec/object"
-)
-
-func createIndizesWithDelta(list objectspec.PermutationList, delta int) ([]int, error) {
+func createIndizesWithDelta(list List, delta int) ([]int, error) {
 	// Initialize scope variables.
 	base := len(list.RawValues())
 	newIndizes := list.Indizes()
@@ -51,6 +47,16 @@ func createIndizesWithDelta(list objectspec.PermutationList, delta int) ([]int, 
 	}
 
 	return newIndizes, nil
+}
+
+func permuteValues(list List) []interface{} {
+	permutedValues := make([]interface{}, len(list.Indizes()))
+
+	for i, index := range list.Indizes() {
+		permutedValues[i] = list.RawValues()[index]
+	}
+
+	return permutedValues
 }
 
 func prepend(s []int, i, x int) []int {
