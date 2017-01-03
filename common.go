@@ -15,7 +15,7 @@ func createIndizesWithDelta(list List, delta int) ([]int, error) {
 
 	for {
 		// Check amount of operations in the first place. That way the initial
-		// situation as well as all other operations are covered.
+		// situation as well as all other operations is covered.
 		operation++
 		if operation > delta {
 			break

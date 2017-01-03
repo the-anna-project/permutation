@@ -54,6 +54,10 @@ type service struct {
 }
 
 func (s *service) PermuteBy(list List, delta int) error {
+	if list.MinGrowth() > 1 {
+		list.SetIndizes(make([]int, list.MinGrowth()))
+	}
+
 	if delta < 1 {
 		return nil
 	}

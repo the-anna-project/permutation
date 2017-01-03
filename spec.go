@@ -8,6 +8,7 @@ type List interface {
 	// is used to prevent infinite permutations. E.g. MaxGrowth set to 4 will not
 	// permute up to a list of 5 raw values.
 	MaxGrowth() int
+	MinGrowth() int
 	// PermutedValues returns the list's permuted values.
 	PermutedValues() []interface{}
 	// RawValues returns the list's unpermuted raw values.
@@ -15,6 +16,7 @@ type List interface {
 	// SetIndizes sets the given indizes of the current permutation list.
 	SetIndizes(indizes []int)
 	SetMaxGrowth(maxGrowth int)
+	SetMinGrowth(minGrowth int)
 	SetRawValues(rawValues []interface{})
 }
 
