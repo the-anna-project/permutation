@@ -13,7 +13,10 @@ func DefaultListConfig() ListConfig {
 // NewList creates a new configured list.
 func NewList(config ListConfig) (List, error) {
 	newList := &list{
+		// Settings.
+		indizes:        []int{},
 		maxGrowth:      5,
+		minGrowth:      1,
 		permutedValues: []interface{}{},
 		rawValues:      []interface{}{},
 	}
@@ -29,6 +32,8 @@ type list struct {
 	indizes []int
 	// maxGrowth represents the maximum length PermutedValues is allowed to grow.
 	maxGrowth int
+	// minGrowth represents the minimum length PermutedValues is allowed to have.
+	minGrowth int
 	// permutedValues represents the permuted list of RawValues. Initially this is
 	// the zero value []interface{}{}.
 	permutedValues []interface{}
@@ -42,6 +47,10 @@ func (l *list) Indizes() []int {
 
 func (l *list) MaxGrowth() int {
 	return l.maxGrowth
+}
+
+func (l *list) MinGrowth() int {
+	return l.minGrowth
 }
 
 func (l *list) PermutedValues() []interface{} {
@@ -62,6 +71,16 @@ func (l *list) SetMaxGrowth(maxGrowth int) {
 		panic(maskAnyf(invalidConfigError, "max growth must be 1 or greater"))
 	}
 	l.maxGrowth = maxGrowth
+}
+
+func (l *list) SetMinGrowth(minGrowth int) {
+	if minGrowth > l.MaxGrowth() {
+		panic(maskAnyf(invalidConfigError, "min growth must not be greater than max growth"))
+	}
+	if minGrowth <= 0 {
+		panic(maskAnyf(invalidConfigError, "min growth must be 1 or greater"))
+	}
+	l.minGrowth = minGrowth
 }
 
 func (l *list) SetRawValues(rawValues []interface{}) {
