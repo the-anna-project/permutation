@@ -111,7 +111,8 @@ func Test_Service_PermuteBy_AbsoluteDelta(t *testing.T) {
 	}
 
 	for i, testCase := range testCases {
-		// Note we use list service for all test cases.
+		// Note that we use a completely new list for each test case. That way we
+		// test the absolute delta incrementation.
 		newList, err := NewList(DefaultListConfig())
 		if err != nil {
 			t.Fatal("expected", nil, "got", err)
@@ -158,11 +159,12 @@ func Test_Service_PermuteBy_Increment(t *testing.T) {
 		},
 	}
 
-	// Note we use the same service for all test cases.
 	newService, err := NewService(DefaultServiceConfig())
 	if err != nil {
 		t.Fatal("expected", nil, "got", err)
 	}
+	// Note that we use the same list for all test cases. That way we test the
+	// incremental delta incrementation.
 	newList, err := NewList(DefaultListConfig())
 	if err != nil {
 		t.Fatal("expected", nil, "got", err)
